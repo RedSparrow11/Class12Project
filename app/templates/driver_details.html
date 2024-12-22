@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1D19AC;
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #E21B4D;
+            color: white;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000B8D;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color:rgb(212, 39, 53);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>{{ driver[2] }} {{ driver[3] }}</h1> <!-- driver[2] is forename, driver[3] is surname -->
+        <p><strong>Driver Ref:</strong> {{ driver[1] }}</p> <!-- driver[1] is driver_ref -->
+        <p><strong>Total Points (2016-2024):</strong> {{ total_points }}</p>
+        <p><strong>Total Wins (2016-2024):</strong> {{ total_wins }}</p>
+        
+        <h2>Season Overview (2016-2024)</h2>
+        {% if seasons %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>Final Position</th>
+                        <th>Total Points</th>
+                        <th>Total Wins</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for season in seasons %}
+                        <tr>
+                            <td>{{ season[6] }}</td>  <!-- season[6] is the year -->
+                            <td>{{ season[7] }}</td>  <!-- season[7] is the final_position -->
+                            <td>{{ season[4] }}</td>  <!-- season[4] is total_points -->
+                            <td>{{ season[5] }}</td>  <!-- season[5] is total_wins -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No data available for this driver. Predictions are being shown based on historical data.</p>
+            <p>Predicted Final Position: {{ prediction['position'] }}</p>
+        {% endif %}
+        
+        <a href="/" class="btn">Back to Home</a>
+    </div>
+
+</body>
+</html>

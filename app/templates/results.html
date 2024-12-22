@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .table {
+            width: 70%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .alert {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Race Results for {{ race_name }} ({{ year }})</h2>
+
+    {% if error %}
+        <div class="alert alert-warning">{{ error }}</div>
+    {% endif %}
+
+    {% if results %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Driver</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>
+                            <a href="{{ url_for('driver_details', driver_id=result[0]) }}">
+                                {{ result[1] }}
+                            </a>
+                        </td>
+                        <td>{{ result[2] }}</td> <!-- Position -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif predictions %}
+        {{ predictions|safe }}
+    {% endif %}
+    
+
+    
+    <a href="/" class="btn btn-primary">Back to Home</a>
+</body>
+</html>

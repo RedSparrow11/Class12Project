@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>F1 Tracker</title>
+</head>
+<body>
+    <h1>Select Race and Year</h1>
+    <form action="{{ url_for('results_page') }}" method="POST">
+        <label for="race">Race:</label>
+        <select name="race" id="race">
+            {% for race in races %}
+            <option value="{{ race }}">{{ race }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="year">Year:</label>
+        <select name="year" id="year">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
